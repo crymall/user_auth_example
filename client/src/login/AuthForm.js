@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { withRouter } from "react-router";
+import { Route, Switch } from "react-router-dom";
 import Auth from "../utils/Auth";
+import Form from "./Form";
 
 class AuthForm extends Component {
   state = {
     username: "",
-    password: "",
-    loggedIn: false
+    password: ""
   };
 
   handleChange = e => {
@@ -32,8 +33,7 @@ class AuthForm extends Component {
       .then(() => {
         this.setState({
           username: "",
-          password: "",
-          loggedIn: true
+          password: ""
         });
       });
   };
@@ -53,42 +53,50 @@ class AuthForm extends Component {
       .then(() => {
         this.setState({
           username: "",
-          password: "",
-          loggedIn: true
+          password: ""
         });
       });
   };
 
   render() {
-    const { username, password, loggedIn } = this.state;
-    const path = this.props.match.path;
+    const { username, password } = this.state;
+    const { isLoggedIn } = this.props;
 
     return (
-      <React.Fragment>
-        <h1> {path === "/auth/login" ? "Login" : "Register"} </h1>
-        <form
-          onSubmit={path === "/auth/login" ? this.loginUser : this.registerUser}
-        >
-          <input
-            type="text"
-            value={username}
-            name="username"
-            placeholder="username"
-            onChange={this.handleChange}
-          />
-          <input
-            type="text"
-            value={password}
-            name="password"
-            placeholder="password"
-            onChange={this.handleChange}
-          />
-          <button type="submit">Submit</button>
-        </form>
-        <p>{loggedIn ? "Success!" : ""}</p>
-      </React.Fragment>
+      <Switch>
+        <Route
+          path="/auth/login"
+          render={() => {
+            return (
+              <Form
+                username={username}
+                password={password}
+                isLoggedIn={isLoggedIn}
+                loginUser={this.loginUser}
+                registerUser={this.registerUser}
+                handleChange={this.handleChange}
+              />
+            );
+          }}
+        />
+        <Route
+          path="/auth/register"
+          render={() => {
+            return (
+              <Form
+                username={username}
+                password={password}
+                isLoggedIn={isLoggedIn}
+                loginUser={this.loginUser}
+                registerUser={this.registerUser}
+                handleChange={this.handleChange}
+              />
+            );
+          }}
+        />
+      </Switch>
     );
   }
 }
 
-export default withRouter(AuthForm);
+export default AuthForm;

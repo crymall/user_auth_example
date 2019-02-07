@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, Link, Switch } from "react-router-dom";
 import axios from "axios";
 import Users from "./users/Users";
-import AuthForms from "./login/AuthForms";
+import AuthForm from "./login/AuthForm";
 import Auth from "./utils/Auth";
 import PrivateRoute from "./utils/AuthRouting";
 
@@ -52,30 +52,19 @@ class App extends Component {
       <div>
         <nav>
           {greeting} {logoutButton}
-          <Link to="/auth/new">Register</Link> {" ~ "}
+          <Link to="/auth/register">Register</Link> {" ~ "}
           <Link to="/auth/login">Log In</Link> {" ~ "}
           <Link to="/users">All Users</Link>
         </nav>
 
         <Switch>
           <Route
-            exact
-            path="/auth/new"
+            path="/auth"
             render={() => {
               return (
-                <AuthForms
+                <AuthForm
                   toggleAuthenticateStatus={this.toggleAuthenticateStatus}
-                />
-              );
-            }}
-          />
-          <Route
-            exact
-            path="/auth/login"
-            render={() => {
-              return (
-                <AuthForms
-                  toggleAuthenticateStatus={this.toggleAuthenticateStatus}
+                  isLoggedIn={isLoggedIn}
                 />
               );
             }}
