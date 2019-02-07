@@ -23,21 +23,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser("never gonna give u up"));
 
-const cookieExpirationDate = new Date();
-const cookieExpirationDays = 365;
-cookieExpirationDate.setDate(
-  cookieExpirationDate.getDate() + cookieExpirationDays
-);
-
 app.use(
   session({
     secret: "never gonna give u up",
     resave: false,
-    saveUninitialized: true,
-    cookie: {
-      httpOnly: true,
-      expires: cookieExpirationDate
-    }
+    saveUninitialized: true
   })
 );
 
