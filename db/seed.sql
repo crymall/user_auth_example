@@ -5,6 +5,6 @@ CREATE DATABASE userlist;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
-  username VARCHAR NOT NULL,
+  username VARCHAR NOT NULL UNIQUE,
   password_digest VARCHAR NOT NULL
 );
