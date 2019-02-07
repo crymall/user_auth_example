@@ -57,29 +57,31 @@ class App extends Component {
           <Link to="/users">All Users</Link>
         </nav>
 
-        <Route
-          exact
-          path="/auth/new"
-          render={() => {
-            return (
-              <AuthForms
-                toggleAuthenticateStatus={this.toggleAuthenticateStatus}
-              />
-            );
-          }}
-        />
-        <Route
-          exact
-          path="/auth/login"
-          render={() => {
-            return (
-              <AuthForms
-                toggleAuthenticateStatus={this.toggleAuthenticateStatus}
-              />
-            );
-          }}
-        />
-        <PrivateRoute path="/users" component={Users} />
+        <Switch>
+          <Route
+            exact
+            path="/auth/new"
+            render={() => {
+              return (
+                <AuthForms
+                  toggleAuthenticateStatus={this.toggleAuthenticateStatus}
+                />
+              );
+            }}
+          />
+          <Route
+            exact
+            path="/auth/login"
+            render={() => {
+              return (
+                <AuthForms
+                  toggleAuthenticateStatus={this.toggleAuthenticateStatus}
+                />
+              );
+            }}
+          />
+          <PrivateRoute path="/users" component={Users} />
+        </Switch>
       </div>
     );
   }
