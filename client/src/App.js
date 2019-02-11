@@ -14,10 +14,10 @@ class App extends Component {
 
   componentDidMount() {
     // check if user is logged in on refresh
-    this.toggleAuthenticateStatus();
+    this.checkAuthenticateStatus();
   }
 
-  toggleAuthenticateStatus = () => {
+  checkAuthenticateStatus = () => {
     this.setState({
       isLoggedIn: Auth.isUserAuthenticated(),
       username: Auth.getToken()
