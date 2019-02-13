@@ -1,15 +1,15 @@
 const Auth = {
   authenticateUser: token => {
-    sessionStorage.setItem("token", token);
+    localStorage.setItem("token", token);
   },
   isUserAuthenticated: () => {
-    return sessionStorage.getItem("token") !== null;
+    return localStorage.getItem("token") !== null;
   },
   deauthenticateUser: () => {
-    sessionStorage.removeItem("token");
+    localStorage.removeItem("token");
   },
   getToken: () => {
-    return sessionStorage.getItem("token");
+    return localStorage.getItem("token");
   }
 };
 

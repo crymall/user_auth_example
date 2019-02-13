@@ -18,9 +18,19 @@ class App extends Component {
   }
 
   checkAuthenticateStatus = () => {
-    this.setState({
-      isLoggedIn: Auth.isUserAuthenticated(),
-      username: Auth.getToken()
+    axios.get("/users/isLoggedIn").then(user => {
+      if (user.data.username === Auth.getToken()) {
+        this.setState({
+          isLoggedIn: Auth.isUserAuthenticated(),
+          username: Auth.getToken()
+        });
+      } else {
+        if (user.data.username) {
+          this.logoutUser();
+        } else {
+          Auth.deauthenticateUser();
+        }
+      }
     });
   };
 
@@ -31,7 +41,7 @@ class App extends Component {
         Auth.deauthenticateUser();
       })
       .then(() => {
-        this.toggleAuthenticateStatus();
+        this.checkAuthenticateStatus();
       });
   };
 
@@ -63,7 +73,7 @@ class App extends Component {
             render={() => {
               return (
                 <AuthForm
-                  toggleAuthenticateStatus={this.toggleAuthenticateStatus}
+                  checkAuthenticateStatus={this.checkAuthenticateStatus}
                   isLoggedIn={isLoggedIn}
                 />
               );

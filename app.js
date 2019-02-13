@@ -5,7 +5,7 @@ var logger = require("morgan");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 const session = require("express-session");
-const passport = require("passport");
+const passport = require("./auth/local");
 
 var index = require("./routes/index");
 var users = require("./routes/users");

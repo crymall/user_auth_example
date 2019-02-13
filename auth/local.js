@@ -13,9 +13,6 @@ passport.use(
       username: username
     })
       .then(user => {
-        if (!user) {
-          return done(null, false);
-        }
         if (!helpers.comparePass(password, user.password_digest)) {
           return done(null, false);
         } else {

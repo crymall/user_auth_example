@@ -1,6 +1,3 @@
-const pgp = require("pg-promise")({});
-const connectionString = "postgres://localhost/userlist";
-const db = pgp(connectionString);
 const bcrypt = require("bcryptjs");
 
 function comparePass(userPass, databasePass) {
@@ -15,8 +12,7 @@ function createHash(password) {
 
 function loginRequired(req, res, next) {
   if (!req.user) {
-    res.status(401)
-       .json({status: "Forbidden - please log in."});
+    res.status(401).json({ status: "Forbidden - please log in." });
     return;
   }
   next();

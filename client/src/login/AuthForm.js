@@ -28,7 +28,7 @@ class AuthForm extends Component {
         axios.post("/users/login", { username, password });
       })
       .then(() => {
-        this.props.toggleAuthenticateStatus();
+        this.props.checkAuthenticateStatus();
       })
       .then(() => {
         this.setState({
@@ -48,7 +48,7 @@ class AuthForm extends Component {
         Auth.authenticateUser(username);
       })
       .then(() => {
-        this.props.toggleAuthenticateStatus();
+        this.props.checkAuthenticateStatus();
       })
       .then(() => {
         this.setState({

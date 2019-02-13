@@ -29,11 +29,20 @@ function logoutUser(req, res, next) {
 }
 
 function loginUser(req, res) {
-  res.json(req.user);
+  res.json(req.user.username);
+}
+
+function isLoggedIn(req, res) {
+  if (req.user) {
+    res.json({ username: req.user.username });
+  } else {
+    res.json({ username: null });
+  }
 }
 
 module.exports = {
   createUser: createUser,
   logoutUser: logoutUser,
-  loginUser: loginUser
+  loginUser: loginUser,
+  isLoggedIn: isLoggedIn
 };
