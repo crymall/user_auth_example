@@ -17,25 +17,36 @@ class AuthForm extends Component {
     });
   };
 
-  registerUser = e => {
+  registerUser = async e => {
     e.preventDefault();
     const { username, password } = this.state;
 
-    axios
-      .post("/users/new", { username, password })
-      .then(() => {
-        Auth.authenticateUser(username);
-        axios.post("/users/login", { username, password });
-      })
-      .then(() => {
-        this.props.checkAuthenticateStatus();
-      })
-      .then(() => {
-        this.setState({
-          username: "",
-          password: ""
-        });
-      });
+    await axios.post("/users/new", { username, password });
+
+    Auth.authenticateUser(username);
+
+    await axios.post("/users/login", { username, password });
+
+    await this.props.checkAuthenticateStatus();
+
+    this.setState({
+      username: "",
+      password: ""
+    });
+    // axios.post("/users/new", { username, password }).then(() => {
+    //   Auth.authenticateUser(username);
+    //   axios
+    //     .post("/users/login", { username, password })
+    //     .then(() => {
+    //       this.props.checkAuthenticateStatus();
+    //     })
+    //     .then(() => {
+    //       this.setState({
+    //         username: "",
+    //         password: ""
+    //       });
+    //     });
+    // });
   };
 
   loginUser = e => {

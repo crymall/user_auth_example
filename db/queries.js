@@ -29,12 +29,12 @@ function logoutUser(req, res, next) {
 }
 
 function loginUser(req, res) {
-  res.json(req.user.username);
+  res.json(req.user);
 }
 
 function isLoggedIn(req, res) {
   if (req.user) {
-    res.json({ username: req.user.username });
+    res.json({ username: req.user });
   } else {
     res.json({ username: null });
   }
